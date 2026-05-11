@@ -3,10 +3,19 @@
 # Скрипт для скачивания видео/аудио через yt-dlp
 # Сохраняет файлы в директорию, доступную для Android плеера
 
-DOWNLOAD_DIR="$HOME/storage/shared/Media"
+TERMUX_STORAGE="$HOME/storage/shared"
+DOWNLOAD_DIR="$TERMUX_STORAGE/Media"
 LOG_FILE="$HOME/download.log"
 
+if [ ! -d "$TERMUX_STORAGE" ]; then
+    echo "Ошибка: хранилище Termux не настроено!"
+    echo "Выполните команду: termux-setup-storage"
+    exit 1
+fi
+
 mkdir -p "$DOWNLOAD_DIR"
+
+echo "Папка для загрузок: $DOWNLOAD_DIR"
 
 print_menu() {
     echo "========================================"
